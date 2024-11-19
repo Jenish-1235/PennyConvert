@@ -2,12 +2,4 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <drawable name="splashBG">
-        <gradient>
-            <gradient_type>linear</gradient_type>
-            <gradient_angle>90</gradient_angle>
-            <gradient_start_color>#BB00BC</gradient_start_color>
-            <gradient_end_color>#9D5BFF</gradient_end_color>
-        </gradient>
-    </drawable>
 </resources>
