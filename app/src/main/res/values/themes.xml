@@ -2,17 +2,26 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.PennyConvert" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorOnPrimary">@color/black</item>
-        <item name="android:colorAccent">@color/white</item>
+
+        <item name="colorPrimary">#FF580A</item>
+<!--        <item name="colorPrimaryVariant"></item>-->
+<!--        <item name="colorSecondary"></item>-->
+<!--        <item name="colorSecondaryVariant"></item>-->
+        <item name="colorOnPrimary">#080708</item>
+<!--        <item name="colorOnSecondary"></item>-->
+<!--        <item name="colorSurface"></item>-->
+        <item name="colorOnBackground">#EBEBEB</item>
+        <item name="colorAccent">#FF580A</item>
 
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowLightStatusBar">true</item>
+<!--        <item name="android:windowLightStatusBar">true</item>-->
 
 
     </style>
 
     <style name="Theme.PennyConvert" parent="Base.Theme.PennyConvert">
+
     </style>
 </resources>
