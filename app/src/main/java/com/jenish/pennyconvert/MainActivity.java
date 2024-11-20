@@ -43,13 +43,15 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        TypedValue colorPrimary = new TypedValue();
+        getTheme().resolveAttribute(com.google.android.material.R.attr.colorPrimary, colorPrimary, true);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }else{
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        getWindow().setStatusBarColor(colorPrimary.data);
 
         ImageView helpButton = findViewById(R.id.helpButton);
         helpButton.setOnClickListener(v -> {
@@ -114,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(historyTab);
 
         TypedValue colorOnPrimary = new TypedValue();
+        TypedValue colorAccent = new TypedValue();
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -121,13 +124,13 @@ public class MainActivity extends AppCompatActivity {
                 int position = tab.getPosition();
 
                 getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnPrimary, colorOnPrimary, true);
-
+                getTheme().resolveAttribute(com.google.android.material.R.attr.colorAccent, colorAccent, true);
                 switch (position){
                     case 0:
 
                         voiceTabIcon.setImageResource(R.drawable.ic_mic);
-                        voiceTabIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E600FF")));
-                        voiceTabText.setTextColor(Color.parseColor("#E600FF"));
+                        voiceTabIcon.setImageTintList(ColorStateList.valueOf(colorAccent.data));
+                        voiceTabText.setTextColor(colorAccent.data);
 
                         cryptoTabIcon.setImageTintList(ColorStateList.valueOf(colorOnPrimary.data));
                         cryptoTabText.setTextColor(colorOnPrimary.data);
@@ -146,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 1:
-                        cryptoTabIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E600FF")));
-                        cryptoTabText.setTextColor(Color.parseColor("#E600FF"));
+                        cryptoTabIcon.setImageTintList(ColorStateList.valueOf(colorAccent.data));
+                        cryptoTabText.setTextColor(colorAccent.data);
 
                         voiceTabIcon.setImageResource(R.drawable.ic_mic_off);
                         voiceTabIcon.setImageTintList(ColorStateList.valueOf(colorOnPrimary.data));
@@ -167,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 2:
-                        currencyTabIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E600FF")));
-                        currencyTabText.setTextColor(Color.parseColor("#E600FF"));
+                        currencyTabIcon.setImageTintList(ColorStateList.valueOf(colorAccent.data));
+                        currencyTabText.setTextColor(colorAccent.data);
 
                         voiceTabIcon.setImageResource(R.drawable.ic_mic_off);
                         voiceTabIcon.setImageTintList(ColorStateList.valueOf(colorOnPrimary.data));
@@ -188,8 +191,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 3:
-                        newsTabIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E600FF")));
-                        newsTabText.setTextColor(Color.parseColor("#E600FF"));
+                        newsTabIcon.setImageTintList(ColorStateList.valueOf(colorAccent.data));
+                        newsTabText.setTextColor(colorAccent.data);
 
                         voiceTabIcon.setImageResource(R.drawable.ic_mic_off);
                         voiceTabIcon.setImageTintList(ColorStateList.valueOf(colorOnPrimary.data));
@@ -209,8 +212,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        historyTabIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E600FF")));
-                        historyTabText.setTextColor(Color.parseColor("#E600FF"));
+                        historyTabIcon.setImageTintList(ColorStateList.valueOf(colorAccent.data));
+                        historyTabText.setTextColor(colorAccent.data);
 
                         voiceTabIcon.setImageResource(R.drawable.ic_mic_off);
                         voiceTabIcon.setImageTintList(ColorStateList.valueOf(colorOnPrimary.data));
@@ -242,18 +245,17 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public void onTabReselected(TabLayout.Tab tab){
                 int position = tab.getPosition();
 
                 getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnPrimary, colorOnPrimary, true);
-
+                getTheme().resolveAttribute(com.google.android.material.R.attr.colorAccent, colorAccent, true);
                 switch (position){
                     case 0:
 
                         voiceTabIcon.setImageResource(R.drawable.ic_mic);
-                        voiceTabIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E600FF")));
-                        voiceTabText.setTextColor(Color.parseColor("#E600FF"));
+                        voiceTabIcon.setImageTintList(ColorStateList.valueOf(colorAccent.data));
+                        voiceTabText.setTextColor(colorAccent.data);
 
                         cryptoTabIcon.setImageTintList(ColorStateList.valueOf(colorOnPrimary.data));
                         cryptoTabText.setTextColor(colorOnPrimary.data);
@@ -272,8 +274,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 1:
-                        cryptoTabIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E600FF")));
-                        cryptoTabText.setTextColor(Color.parseColor("#E600FF"));
+                        cryptoTabIcon.setImageTintList(ColorStateList.valueOf(colorAccent.data));
+                        cryptoTabText.setTextColor(colorAccent.data);
 
                         voiceTabIcon.setImageResource(R.drawable.ic_mic_off);
                         voiceTabIcon.setImageTintList(ColorStateList.valueOf(colorOnPrimary.data));
@@ -293,8 +295,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 2:
-                        currencyTabIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E600FF")));
-                        currencyTabText.setTextColor(Color.parseColor("#E600FF"));
+                        currencyTabIcon.setImageTintList(ColorStateList.valueOf(colorAccent.data));
+                        currencyTabText.setTextColor(colorAccent.data);
 
                         voiceTabIcon.setImageResource(R.drawable.ic_mic_off);
                         voiceTabIcon.setImageTintList(ColorStateList.valueOf(colorOnPrimary.data));
@@ -314,8 +316,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 3:
-                        newsTabIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E600FF")));
-                        newsTabText.setTextColor(Color.parseColor("#E600FF"));
+                        newsTabIcon.setImageTintList(ColorStateList.valueOf(colorAccent.data));
+                        newsTabText.setTextColor(colorAccent.data);
 
                         voiceTabIcon.setImageResource(R.drawable.ic_mic_off);
                         voiceTabIcon.setImageTintList(ColorStateList.valueOf(colorOnPrimary.data));
@@ -335,8 +337,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        historyTabIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E600FF")));
-                        historyTabText.setTextColor(Color.parseColor("#E600FF"));
+                        historyTabIcon.setImageTintList(ColorStateList.valueOf(colorAccent.data));
+                        historyTabText.setTextColor(colorAccent.data);
 
                         voiceTabIcon.setImageResource(R.drawable.ic_mic_off);
                         voiceTabIcon.setImageTintList(ColorStateList.valueOf(colorOnPrimary.data));
