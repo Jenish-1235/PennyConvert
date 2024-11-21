@@ -1,5 +1,7 @@
 package com.jenish.pennyconvert.services;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.jenish.pennyconvert.models.CurrencyModel;
 
@@ -10,34 +12,31 @@ import java.net.URL;
 import java.util.Currency;
 
 public class ExchangeRateApiService {
-    private static final String BASE_URL = "https://v6.exchangerate-api.com/v6/46eaa92b38df6d8e61037b38/latest/USD";
+    public ExchangeRateApiService(){};
 
     public CurrencyModel fetchData(){
-        CurrencyModel currencyModel = new CurrencyModel();
 
         try{
-            URL url = new URL(BASE_URL);
+            URL url = new URL("https://v6.exchangerate-api.com/v6/46eaa92b38df6d8e61037b38/latest/USD");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line;
             StringBuilder response = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
+            String line;
+            while ((line = reader.readLine()) != null){
                 response.append(line);
             }
-
-            reader.close();
             Gson gson = new Gson();
-            currencyModel = gson.fromJson(response.toString(), CurrencyModel.class);
-
-
+            CurrencyModel currencyModel = gson.fromJson(response.toString(), CurrencyModel.class);
+//            Log.i("Datatata", "Data fetched + " + currencyModel.conversion_rates.size());
+            return currencyModel;
 
         }catch (Exception e){
-            e.printStackTrace();
+//            Log.e("Datatata", "Error fetching data: " + e.getMessage());
         }
 
-        return currencyModel;
+        return null;
     }
 
 }

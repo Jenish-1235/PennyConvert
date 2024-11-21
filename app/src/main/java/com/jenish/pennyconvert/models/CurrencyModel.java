@@ -12,4 +12,8 @@ public class CurrencyModel {
     public String time_next_update_utc;
     public String base_code;
     public HashMap<String, Double> conversion_rates;
+
+    public CurrencyModel(){
+        conversion_rates = new HashMap<>();
+    }
 }
