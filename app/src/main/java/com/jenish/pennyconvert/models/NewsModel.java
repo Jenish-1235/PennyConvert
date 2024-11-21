@@ -12,6 +12,8 @@ public class NewsModel {
     public String summary;
     public String url;
 
+    public NewsModel(){}
+
     public NewsModel(String headline, String summary, String source, String urlStr, String image) {
         this.headline = headline;
         this.summary = summary;
