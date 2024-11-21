@@ -54,14 +54,45 @@ public class CurrencyConvertFragment extends Fragment {
                         Collections.sort(currencies, new Comparator<String>() {
                             @Override
                             public int compare(String o1, String o2) {
-                                if(o1.equals("Select") || o2.equals("Select")){
+                                if (o1.equals("Select") || o2.equals("Select")) {
                                     return 0;
                                 }
                                 return o1.compareTo(o2);
                             }
                         });
-                        baseCurrencyInput.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_2, currencies));
-                        targetCurrencyInput.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_2, currencies));
+                        baseCurrencyInput.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, currencies));
+                        targetCurrencyInput.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, currencies));
+
+                        convertButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String amount = amountInput.getText().toString();
+                                String baseCurrency = baseCurrencyInput.getSelectedItem().toString();
+                                String targetCurrency = targetCurrencyInput.getSelectedItem().toString();
+
+                                if (amount.isEmpty()) {
+                                    Toast.makeText(getActivity(), "Please enter an amount", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                if (baseCurrency.equals("Select") || targetCurrency.equals("Select")) {
+                                    Toast.makeText(getActivity(), "Please select a currency", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                if (baseCurrency.equals(targetCurrency)) {
+                                    Toast.makeText(getActivity(), "Please select different currencies", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
+                                double baseCurrencyRate = 1 / currencyData.conversion_rates.get(baseCurrency);
+                                double targetCurrencyRate = currencyData.conversion_rates.get(targetCurrency);
+                                double convertedAmount = Double.parseDouble(amount) * (baseCurrencyRate * targetCurrencyRate);
+                                convertValueView.setText(String.format("%.2f %s", convertedAmount, targetCurrency));
+                                convertValueView.setVisibility(View.VISIBLE);
+                                factsViewLinearLayout.setVisibility(View.VISIBLE);
+
+
+                            }
+                        });
                     }
                 });
             }
