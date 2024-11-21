@@ -9,4 +9,9 @@ public class CryptoModel {
     public String timestamp;
     public String target;
     public HashMap<String, Double> rates;
+
+    public CryptoModel(){
+        rates = new HashMap<>();
+    }
+
 }

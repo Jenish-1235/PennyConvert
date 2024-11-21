@@ -1,5 +1,7 @@
 package com.jenish.pennyconvert.services;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.jenish.pennyconvert.models.CryptoModel;
 
@@ -13,12 +15,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CoinLayerApiService {
-    private static final String BASE_URL = "http://api.coinlayer.com/live?access_key=d0b5a02f4300892deddee7f02f414906";
-
+    public CoinLayerApiService(){};
     public CryptoModel fetchData(){
 
         try{
-            URL url = new URL(BASE_URL);
+            URL url = new URL("https://api.coinlayer.com/api/live?access_key=c82cdf2236d09de9df51aa030d4f3813");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
@@ -31,10 +32,11 @@ public class CoinLayerApiService {
 
             Gson gson = new Gson();
             CryptoModel cryptoModel = gson.fromJson(response.toString(), CryptoModel.class);
+            Log.i("Datatata", "Data fetched + " + cryptoModel.rates.size());
             return cryptoModel;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("Datatata", "Error fetching data: " + e.getMessage());
         }
         return null;
     }
