@@ -65,7 +65,7 @@
                     app:boxStrokeWidthFocused="0dp"
                     app:endIconTint="?attr/colorOnPrimary">
 
-                    <AutoCompleteTextView
+                    <Spinner
                         android:id="@+id/baseCurrencyInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                     app:boxStrokeWidthFocused="0dp"
                     app:endIconTint="?attr/colorOnPrimary">
 
-                    <AutoCompleteTextView
+                    <Spinner
                         android:id="@+id/targetCurrencyInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
