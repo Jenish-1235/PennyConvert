@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.ai.client.generativeai.GenerativeModel;
+import com.google.ai.client.generativeai.java.GenerativeModelFutures;
+import com.google.ai.client.generativeai.type.Content;
+import com.google.ai.client.generativeai.type.GenerateContentResponse;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.jenish.pennyconvert.R;
 import com.jenish.pennyconvert.models.CurrencyModel;
 import com.jenish.pennyconvert.services.ExchangeRateApiService;
@@ -23,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.Exchanger;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class CurrencyConvertFragment extends Fragment {
 
@@ -38,6 +48,8 @@ public class CurrencyConvertFragment extends Fragment {
         Button convertButton = view.findViewById(R.id.convertButton);
         TextView convertValueView = view.findViewById(R.id.convertValueView);
         LinearLayout factsViewLinearLayout = view.findViewById(R.id.factsViewLinearLayout);
+        TextView factView1 = view.findViewById(R.id.factView1);
+        TextView factView2 = view.findViewById(R.id.factView2);
 
         Thread getCurrenciesThread = new Thread(new Runnable(){
             @Override
@@ -91,6 +103,8 @@ public class CurrencyConvertFragment extends Fragment {
                                     convertValueView.setVisibility(View.VISIBLE);
                                     factsViewLinearLayout.setVisibility(View.VISIBLE);
 
+                                    getFacts(baseCurrency + " Currency", 1, factView1, factView2);
+                                    getFacts(targetCurrency + " Currency", 2, factView1, factView2);
 
                                 }
                             });
@@ -103,5 +117,37 @@ public class CurrencyConvertFragment extends Fragment {
         getCurrenciesThread.start();
 
         return view;
+    }
+
+    private void getFacts(String currency, int factView, TextView factView1, TextView factView2){
+        GenerativeModel gm = new GenerativeModel("gemini-1.5-flash-8b", "AIzaSyBt5pEBnSGL2k4A-GTO-6M3zY6ta6O6--A");
+        GenerativeModelFutures model = GenerativeModelFutures.from(gm);
+
+        Content content = new Content.Builder().addText("Give me 1 random fact about " + currency).build();
+        Executor executor = Executors.newSingleThreadExecutor();
+        ListenableFuture<GenerateContentResponse> response = model.generateContent(content);
+        Futures.addCallback(
+                response,
+                new FutureCallback<GenerateContentResponse>() {
+                    @Override
+                    public void onSuccess(GenerateContentResponse result) {
+                        String resultText = result.getText();
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (factView == 1) {
+                                    factView1.setText(resultText);
+                                } else {
+                                    factView2.setText(resultText);
+                                }
+                            }
+                        });
+                    }
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Log.i("Datatata", t.getMessage());
+                    }
+
+                }, executor);
     }
 }
