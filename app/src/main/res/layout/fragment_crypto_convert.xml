@@ -183,7 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Fact : "
+                android:text="Hang Tighttttt !!!! Getting some cool facts for you..... "
                 android:textSize="18sp"
                 android:textColor="?attr/colorOnPrimary"
                 android:id="@+id/factView1"/>
@@ -193,7 +193,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Fact : "
+                android:text=""
                 android:textSize="18sp"
                 android:textColor="?attr/colorOnPrimary"
                 android:id="@+id/factView2"/>
