@@ -9,7 +9,7 @@
 <!--        <item name="colorSecondaryVariant"></item>-->
         <item name="colorOnPrimary">#080708</item>
 <!--        <item name="colorOnSecondary"></item>-->
-<!--        <item name="colorSurface"></item>-->
+        <item name="colorSurface">#8E8E8E</item>
         <item name="colorOnBackground">#EBEBEB</item>
         <item name="colorAccent">#FF580A</item>
 
