@@ -26,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.jenish.pennyconvert.BuildConfig;
 import com.jenish.pennyconvert.R;
 import com.jenish.pennyconvert.models.CurrencyModel;
 import com.jenish.pennyconvert.services.ExchangeRateApiService;
@@ -53,6 +54,7 @@ public class VoiceConvertFragment extends Fragment {
     }
 
 
+    String apiKey = BuildConfig.API_KEY;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -140,10 +142,10 @@ public class VoiceConvertFragment extends Fragment {
     }
 
     private void resolveCommand(String command, TextView outputView){
-        GenerativeModel gm = new GenerativeModel("gemini-1.5-flash-8b", "AIzaSyBt5pEBnSGL2k4A-GTO-6M3zY6ta6O6--A");
+        GenerativeModel gm = new GenerativeModel("gemini-1.5-flash-8b", apiKey);
         GenerativeModelFutures model = GenerativeModelFutures.from(gm);
 
-        Content content = new Content.Builder().addText("Get me amount and currency codes in 3 digit for both the country's mentioned in the following sentence: " + command + "in this form: example :- USDINR<Amount> where USD is base currency and INR is target currency and amount is amount to be converted. You don't have to convert the amount. You just need to give me same amount given by user. I will use external api for conversion").build();
+        Content content = new Content.Builder().addText("Get me amount and currency codes in 3 digit for both the country's mentioned in the following sentence: " + command + "in this form: example :- <basecurrency><targetcurrency><Amount> reference: USDINR200 where USD is base currency and INR is target currency and amount is amount to be converted. You don't have to convert the amount. You just need to give me same amount given by user. I will use external api for conversion").build();
         Executor executor = Executors.newSingleThreadExecutor();
         ListenableFuture<GenerateContentResponse> response = model.generateContent(content);
         Futures.addCallback(

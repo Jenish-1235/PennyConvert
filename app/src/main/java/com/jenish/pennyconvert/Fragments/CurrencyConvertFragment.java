@@ -23,6 +23,7 @@ import com.google.ai.client.generativeai.type.GenerateContentResponse;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.jenish.pennyconvert.BuildConfig;
 import com.jenish.pennyconvert.R;
 import com.jenish.pennyconvert.models.CurrencyModel;
 import com.jenish.pennyconvert.services.ExchangeRateApiService;
@@ -36,6 +37,7 @@ import java.util.concurrent.Executors;
 
 public class CurrencyConvertFragment extends Fragment {
 
+    String apiKey = BuildConfig.API_KEY;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -120,7 +122,7 @@ public class CurrencyConvertFragment extends Fragment {
     }
 
     private void getFacts(String currency, int factView, TextView factView1, TextView factView2){
-        GenerativeModel gm = new GenerativeModel("gemini-1.5-flash-8b", "AIzaSyBt5pEBnSGL2k4A-GTO-6M3zY6ta6O6--A");
+        GenerativeModel gm = new GenerativeModel("gemini-1.5-flash-8b", apiKey);
         GenerativeModelFutures model = GenerativeModelFutures.from(gm);
 
         Content content = new Content.Builder().addText("Give me 1 random fact about " + currency).build();

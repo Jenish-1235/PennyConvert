@@ -1,10 +1,27 @@
+import java.util.Properties
+import java.io.FileInputStream
+import java.io.File
+
+// Helper function to read a property from local.properties
+fun getLocalProperty(propertyName: String): String {
+    val properties = Properties()
+    val localPropertiesFile = File(rootProject.rootDir, "local.properties")
+    if (localPropertiesFile.exists()) {
+        FileInputStream(localPropertiesFile).use { properties.load(it) }
+        return properties.getProperty(propertyName, "")
+    }
+    return ""
+}
+
 plugins {
-    alias(libs.plugins.android.application)
+    id("com.android.application")
 }
 
 android {
     namespace = "com.jenish.pennyconvert"
     compileSdk = 34
+
+
 
     defaultConfig {
         applicationId = "com.jenish.pennyconvert"
@@ -14,8 +31,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
 
+        val apiKey = getLocalProperty("API_KEY")
+
+        // Inject the API key into BuildConfig as a String field
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
+
+    }
+    buildFeatures {
+        buildConfig = true // Ensure BuildConfig is enabled
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -52,8 +77,9 @@ dependencies {
     // Required for streaming operations (to use `Publisher` from Reactive Streams)
     implementation("org.reactivestreams:reactive-streams:1.0.4")
 
-    dependencies {
-        implementation ("androidx.core:core:1.12.0")
-    }
+    implementation ("androidx.core:core:1.12.0")
+
+    implementation("com.google.android.gms:play-services-basement:18.2.0")
+
 
 }

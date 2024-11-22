@@ -1,5 +1,6 @@
 package com.jenish.pennyconvert.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,18 +24,27 @@ import com.google.ai.client.generativeai.type.GenerateContentResponse;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.jenish.pennyconvert.BuildConfig;
 import com.jenish.pennyconvert.R;
 import com.jenish.pennyconvert.models.CryptoModel;
 import com.jenish.pennyconvert.services.CoinLayerApiService;
 import com.jenish.pennyconvert.services.GeminiAiApi;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Properties;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class CryptoConvertFragment extends Fragment{
+
+    String apiKey = BuildConfig.API_KEY;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,7 +59,6 @@ public class CryptoConvertFragment extends Fragment{
         TextView factView1 = view.findViewById(R.id.factView1);
         TextView factView2 = view.findViewById(R.id.factView2);
         LinearLayout factsViewLinearLayout = view.findViewById(R.id.factsViewLinearLayout);
-
         Thread cryptoThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -96,6 +105,8 @@ public class CryptoConvertFragment extends Fragment{
                                     factsViewLinearLayout.setVisibility(View.VISIBLE);
                                     convertValueView.setVisibility(View.VISIBLE);
 
+//                                    Log.i("Daaatata", apiKey.toString());
+//
                                     getFacts(baseCrypto + " Crypto Currency", 1, factView1, factView2);
                                     getFacts(targetCrypto + " Crypto Currency", 2, factView1, factView2);
                                 }
@@ -110,7 +121,7 @@ public class CryptoConvertFragment extends Fragment{
         return view;
     }
     private void getFacts(String currency, int factView, TextView factView1, TextView factView2){
-        GenerativeModel gm = new GenerativeModel("gemini-1.5-flash-8b", "AIzaSyBt5pEBnSGL2k4A-GTO-6M3zY6ta6O6--A");
+        GenerativeModel gm = new GenerativeModel("gemini-1.5-flash-8b", apiKey);
         GenerativeModelFutures model = GenerativeModelFutures.from(gm);
 
         Content content = new Content.Builder().addText("Give me 1 random fact about " + currency).build();
@@ -140,4 +151,16 @@ public class CryptoConvertFragment extends Fragment{
 
                 }, executor);
     }
+
+    public static String getApiKey(Context context){
+        Properties properties = new Properties();
+        try{
+            InputStream inputStream = new FileInputStream(new File("local.properties"));
+            properties.load(inputStream);
+        } catch (Exception e) {
+            Log.i("Datatata", e.getMessage());
+        }
+        return properties.getProperty("apiKey");
+    }
+
 }
