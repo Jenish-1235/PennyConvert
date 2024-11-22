@@ -56,3 +56,13 @@ _Add screenshots of your app in action here!_
 1. Clone this repository:
    ```bash
    git clone https://github.com/yourusername/currency-converter-app.git
+
+2. Open the project in Android Studio.
+3. Add your API keys in the local.properties or a dedicated secrets.xml file:
+   
+         exchangerate_api_key=<YOUR_API_KEY>
+         coinlayer_api_key=<YOUR_API_KEY>
+         gemini_api_key=<YOUR_API_KEY>
+         finhub_api_key=<YOUR_API_KEY>
+
+4. Build and run the app on your Android device.
