@@ -46,11 +46,6 @@ Your one-stop solution for **real-time currency conversions**, **crypto exchange
 
 ---
 
-## 📸 Screenshots
-_Add screenshots of your app in action here!_
-
----
-
 ## 📂 Installation
 
 1. Clone this repository:
