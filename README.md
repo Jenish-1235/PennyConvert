@@ -66,15 +66,15 @@ Your one-stop solution for **real-time currency conversions**, **crypto exchange
 
 ## 🎯 Usage
 
-    Open the app to the Currency Converter tab for global currency conversions.
+   1. Open the app to the Currency Converter tab for global currency conversions.
         Input the base and target currencies to get the exchange rate.
         Discover 2 random facts about both currencies via the Gemini API.
-    Navigate to the Crypto Converter tab for crypto-to-crypto trades.
+   2. Navigate to the Crypto Converter tab for crypto-to-crypto trades.
         Select your base and target cryptocurrencies to view their exchange details.
         Learn 2 random facts about the selected cryptos.
-    Use voice commands for effortless conversions.
-    Check out the News Feed for market updates.
-    Review your conversion history for past transactions.
+   3. Use voice commands for effortless conversions.
+   4. Check out the News Feed for market updates.
+   5. Review your conversion history for past transactions.
 
 ---
 ## 🤝 Contributions
