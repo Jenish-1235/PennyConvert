@@ -64,7 +64,7 @@ Your one-stop solution for **real-time currency conversions**, **crypto exchange
 
 ---
 
-🎯 Usage
+## 🎯 Usage
 
     Open the app to the Currency Converter tab for global currency conversions.
         Input the base and target currencies to get the exchange rate.
@@ -76,15 +76,17 @@ Your one-stop solution for **real-time currency conversions**, **crypto exchange
     Check out the News Feed for market updates.
     Review your conversion history for past transactions.
 
-🤝 Contributions
+---
+## 🤝 Contributions
 
 Contributions, issues, and feature requests are welcome!
 Feel free to open an issue or submit a pull request.
-📜 License
+
 
 This project is licensed under the MIT License.
 See the LICENSE file for details.
-🌟 Acknowledgements:
+---
+## 🌟 Acknowledgements:
 
     ExchangeRate API
     Coinlayer API
