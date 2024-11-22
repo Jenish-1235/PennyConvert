@@ -35,6 +35,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
+            android:id="@+id/outputView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="Output"

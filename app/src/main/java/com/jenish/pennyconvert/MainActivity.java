@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             Intent helpActivity = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(helpActivity);
         });
-
 
         bottomTabLayoutFormation(2);
     }
