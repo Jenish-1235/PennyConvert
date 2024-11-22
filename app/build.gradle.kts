@@ -51,4 +51,9 @@ dependencies {
 
     // Required for streaming operations (to use `Publisher` from Reactive Streams)
     implementation("org.reactivestreams:reactive-streams:1.0.4")
+
+    dependencies {
+        implementation ("androidx.core:core:1.12.0")
+    }
+
 }
